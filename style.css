@@ -28,29 +28,3 @@ body.dark {
 	background-color: #121212;
 	color: #f5f5f5;
 }
-
-/* Put picture left and text right */
-.top-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
-/* image on the left */
-.left-side {
-    flex: 1;
-    text-align: center;
-}
-
-/* text on the right */
-.right-side {
-    flex: 1;
-    text-align: left;
-}
-
-#profile-img {
-    width: 180px;
-    border-radius: 50%;
-}
-
