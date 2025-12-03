@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Student Portfolio</title>
-      <link rel="stylesheet" href="style.css">
-   </head>
-   <body>
-      <header>
-         <h1 id="name">Prince Kurt Cagas</h1>
-         <img src="profile_pic.jpg" alt="Profile Picture" id="profile-img">
-         <p id="course-year">BSCS | 2nd-Year</p>
-         <button id="theme-toggle">Switch Theme</button>
-      </header>
-      <section id="achievements">
-         <h2>Achievements/Certifications</h2>
-         <ul>
-            <li>Certified Information Technology Specialist — Java Programming (Certiport)</li>
-            <li>Dean's Lister AY 2024-2025</li>
-         </ul>
-      </section>
-      <section id="projects">
-         <h2>Previous Projects</h2>
-         <ul>
-            <li>Inventory and Sales System</li>
-            <li>Ride-Sharing Application</li>
-         </ul>
-      </section>
-      <script src="script.js"></script>
-   </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Unique Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">PK<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="fade-in">Hello, I'm <span>Prince Kurt</span></h1>
+      <p class="slide-up">Aspiring Developer • IT Specialist • Creative Builder</p>
+      <a href="#projects" class="btn pulse">See My Work</a>
+    </div>
+  </header>
+
+  <section id="projects" class="projects-section">
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card pop">
+        <h3>Inventory & Sales System</h3>
+        <p>A full system that manages items, sales tracking, and reporting.</p>
+      </div>
+      <div class="project-card pop">
+        <h3>RideSharing Application</h3>
+        <p>A mobile app for matching drivers and hitchers using live location.</p>
+      </div>
+      <div class="project-card pop">
+        <h3>Java IT Specialist Exam</h3>
+        <p>Passed certification demonstrating strong Java fundamentals.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2>About Me</h2>
+    <p>I'm an IT student passionate about coding, UI/UX, and building real-world apps. Currently learning and improving my HTML, CSS, and JS skills.</p>
+  </section>
+
+  <footer id="contact" class="footer">
+    <p>© 2025 Prince Kurt • All Rights Reserved</p>
+  </footer>
+</body>
 </html>
