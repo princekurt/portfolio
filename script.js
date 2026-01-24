@@ -1,5 +1,7 @@
+// Safe toggle button
 const toggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-toggleButton.addEventListener('click', () => {
-    body.classList.toggle('dark');
-});
+if (toggleButton) {
+  toggleButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+  });
+}
