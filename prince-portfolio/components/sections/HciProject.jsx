@@ -1,9 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Download, ExternalLink, Map, ScrollText } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  ExternalLink,
+  Map,
+  ScrollText,
+} from "lucide-react";
 import { hciProject } from "@/data/hciProject";
 import { withBasePath } from "@/lib/basePath";
 import { scrollFadeUp, viewportOnce } from "@/lib/motion";
@@ -63,6 +70,19 @@ function PhoneFrame({ screen }) {
 }
 
 function ScreenshotGrid({ screenshots }) {
+  const scrollRef = useRef(null);
+
+  const scrollScreenshots = (direction) => {
+    const container = scrollRef.current;
+
+    if (!container) return;
+
+    container.scrollBy({
+      left: direction * container.clientWidth * 0.85,
+      behavior: "smooth",
+    });
+  };
+
   if (!screenshots.length) {
     return (
       <div className="mt-8 rounded-lg border border-border bg-surface p-5 text-sm leading-relaxed text-muted">
@@ -73,24 +93,58 @@ function ScreenshotGrid({ screenshots }) {
   }
 
   return (
-    <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {screenshots.map((screenshot) => (
-        <li
-          key={screenshot.src}
-          className="overflow-hidden rounded-lg border border-border bg-surface transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-muted hover:bg-surface-raised hover:shadow-xl"
-        >
-          <div className="relative aspect-[4/3] w-full bg-background">
-            <Image
-              src={withBasePath(screenshot.src)}
-              alt={screenshot.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover"
-            />
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="relative mt-8">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent" />
+
+      <button
+        type="button"
+        aria-label="Previous SafePath screenshot"
+        onClick={() => scrollScreenshots(-1)}
+        className="absolute top-1/2 left-0 z-20 hidden size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 text-foreground shadow-xl backdrop-blur transition-[background-color,border-color,transform] duration-200 hover:scale-105 hover:border-muted hover:bg-surface-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:inline-flex"
+      >
+        <ChevronLeft size={20} aria-hidden="true" />
+      </button>
+
+      <button
+        type="button"
+        aria-label="Next SafePath screenshot"
+        onClick={() => scrollScreenshots(1)}
+        className="absolute top-1/2 right-0 z-20 hidden size-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 text-foreground shadow-xl backdrop-blur transition-[background-color,border-color,transform] duration-200 hover:scale-105 hover:border-muted hover:bg-surface-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:inline-flex"
+      >
+        <ChevronRight size={20} aria-hidden="true" />
+      </button>
+
+      <ul
+        ref={scrollRef}
+        className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-2"
+      >
+        {screenshots.map((screenshot, index) => (
+          <li
+            key={screenshot.src}
+            className="w-[min(72vw,17rem)] shrink-0 snap-center"
+          >
+            <article className="group relative rounded-[2rem] border border-border bg-surface p-2 shadow-2xl transition-[background-color,border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-muted hover:bg-surface-raised hover:shadow-[0_24px_70px_rgba(0,0,0,0.45)]">
+              <div className="pointer-events-none absolute -top-2 right-6 z-20 rounded-full border border-border bg-background px-2.5 py-1 text-xs font-medium text-accent shadow-lg">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+
+              <div className="relative aspect-[946/2048] overflow-hidden rounded-[1.45rem] border border-border bg-black">
+                <div className="absolute top-3 left-1/2 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-background/80 shadow-sm" />
+                <Image
+                  src={withBasePath(screenshot.src)}
+                  alt={screenshot.alt}
+                  fill
+                  sizes="(max-width: 640px) 72vw, 272px"
+                  className="object-contain"
+                />
+                <div className="absolute bottom-2 left-1/2 z-10 h-1 w-16 -translate-x-1/2 rounded-full bg-foreground/30" />
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -258,7 +312,7 @@ export default function HciProject() {
             variants={scrollFadeUp}
             className="font-heading text-3xl leading-tight tracking-tight text-foreground sm:text-4xl"
           >
-            Award during CCIS Innovation 2026
+            Highlights during CCIS Innovation 2026
           </motion.h2>
 
           {hciProject.awards.length > 0 ? (

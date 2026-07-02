@@ -41,12 +41,30 @@ export const hciProject = {
     },
   ],
   screenshots: [
-    /*
     {
-      src: "/hci-project/route-planner.png",
-      alt: "SafePath route planner interface",
+      src: "/hci-project/screenshot1.jpg",
+      alt: "SafePath app screenshot 1",
     },
-    */
+    {
+      src: "/hci-project/screenshot2.jpg",
+      alt: "SafePath app screenshot 2",
+    },
+    {
+      src: "/hci-project/screenshot3.jpg",
+      alt: "SafePath app screenshot 3",
+    },
+    {
+      src: "/hci-project/screenshot4.jpg",
+      alt: "SafePath app screenshot 4",
+    },
+    {
+      src: "/hci-project/screenshot5.jpg",
+      alt: "SafePath app screenshot 5",
+    },
+    {
+      src: "/hci-project/screenshot6.jpg",
+      alt: "SafePath app screenshot 6",
+    },
   ],
   awards: [
     {

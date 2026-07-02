@@ -66,14 +66,9 @@ export const featuredProjects = [
     description:
       "A mobile app for matching drivers and hitchers using live location.",
   },
-  {
-    title: "Java IT Specialist Exam",
-    description:
-      "Passed certification demonstrating strong Java fundamentals.",
-  },
 ];
 
 export const about = {
   heading: "About Me",
-  body: "I'm a CS student passionate about coding, UI/UX, and building real-world apps. Currently learning and improving my HTML, CSS, and JS skills.",
+  body: "Hi, I'm Prince Kurt — a second-year Computer Science student who loves turning ideas into code. I'm still exploring different areas of tech, from web to mobile to AI, and I enjoy the process of learning by building. Always down for a new challenge that makes me a better dev.",
 };
