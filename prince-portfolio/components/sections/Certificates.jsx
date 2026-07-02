@@ -13,6 +13,30 @@ function isPdf(file) {
   return file?.split("?")[0].toLowerCase().endsWith(".pdf");
 }
 
+function CertificatePreview({ certificate }) {
+  if (isPdf(certificate.file)) {
+    return (
+      <iframe
+        title={`${certificate.title} preview`}
+        src={`${certificate.file}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="h-full w-full pointer-events-none border-0 bg-background"
+      />
+    );
+  }
+
+  return (
+    <Image
+      src={certificate.image}
+      alt={`${certificate.title} certificate thumbnail`}
+      fill
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+    />
+  );
+}
+
 function CertificateModal({ certificate, triggerRef, onClose }) {
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
@@ -179,19 +203,17 @@ export default function Certificates() {
                 viewport={viewportOnce}
                 variants={scrollFadeUp}
               >
-                <button
-                  type="button"
-                  onClick={(event) => openCertificate(certificate, event)}
-                  className="group flex h-full w-full flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-muted hover:bg-surface-raised hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                <article
+                  className="group relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-border bg-surface text-left transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-muted hover:bg-surface-raised hover:shadow-xl"
                 >
+                  <button
+                    type="button"
+                    onClick={(event) => openCertificate(certificate, event)}
+                    aria-label={`View ${certificate.title} certificate`}
+                    className="absolute inset-0 z-10 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  />
                   <span className="relative block aspect-[4/3] w-full overflow-hidden border-b border-border bg-background">
-                    <Image
-                      src={certificate.image}
-                      alt={`${certificate.title} certificate thumbnail`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
+                    <CertificatePreview certificate={certificate} />
                   </span>
                   <span className="flex flex-1 flex-col p-5">
                     <span className="text-base font-medium leading-snug text-foreground">
@@ -201,7 +223,7 @@ export default function Certificates() {
                       {certificate.issuer} - {certificate.date}
                     </span>
                   </span>
-                </button>
+                </article>
               </motion.li>
             ))}
           </ul>
